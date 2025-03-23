@@ -1,0 +1,10 @@
+[Unit]
+Description=Nextcloud Pod
+
+[Pod]
+PodName=nextcloud
+PublishPort=8080:80
+
+# to satisfy nextcloud bitch permissions problems
+UIDMap=1000:0:1
+UIDMap=0:1:1000
