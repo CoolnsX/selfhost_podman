@@ -1,0 +1,23 @@
+[Unit]
+Description=Prowlarr Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=prowlarr
+Image=lscr.io/linuxserver/prowlarr:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/prowlarr:/config
+Volume=${DATA}:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,24 @@
+[Unit]
+Description=Transmission Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=transmission
+Image=lscr.io/linuxserver/transmission:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/transmission:/config
+Volume=${DATA}/downloads:/downloads
+Volume=${DATA}/watch:/watch
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

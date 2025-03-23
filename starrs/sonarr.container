@@ -1,0 +1,23 @@
+[Unit]
+Description=Sonarr Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=sonarr
+Image=lscr.io/linuxserver/sonarr:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/sonarr:/config
+Volume=${DATA}:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

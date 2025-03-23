@@ -1,0 +1,23 @@
+[Unit]
+Description=Radarr Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=radarr
+Image=lscr.io/linuxserver/radarr:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/radarr:/config
+Volume=${DATA}:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

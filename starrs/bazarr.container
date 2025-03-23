@@ -1,0 +1,23 @@
+[Unit]
+Description=Bazarr Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=bazarr
+Image=lscr.io/linuxserver/bazarr:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/bazarr:/config
+Volume=${DATA}/media:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

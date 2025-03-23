@@ -1,0 +1,26 @@
+[Unit]
+Description=Jellyfin Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=jellyfin
+Image=lscr.io/linuxserver/jellyfin:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/jellyfin:/config
+Volume=${DATA}/media:/data
+
+# gpu
+AddDevice=/dev/dri
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
