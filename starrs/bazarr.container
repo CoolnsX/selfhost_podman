@@ -11,7 +11,7 @@ AutoUpdate=registry
 EnvironmentFile=./.env
 
 Volume=%h/podman/starrs/bazarr:/config
-Volume=${DATA}/media:/data
+Volume=${DATA}:/data
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env

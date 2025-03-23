@@ -2,21 +2,18 @@
 Description=Nextcloud Imaginary Container
 
 [Container]
-Pod=nextcloud.pod
 ContainerName=nextcloud_imaginary
 Image=docker.io/nextcloud/aio-imaginary
 Exec="/start.sh -enable-url-source -cors -return-size"
 
 # Enable auto-update container
 AutoUpdate=registry
-# pass this to attach it to container
-EnvironmentFile=./.env
 # capabilities
-AddCapability=SYS_NICE
+AddCapability=CAP_SYS_NICE
+Environment=PORT=11000
+PublishPort=11000:11000
 
 [Service]
-# pass this to autofill above variables
-EnvironmentFile=%h/.config/containers/systemd/nextcloud/.env
 Restart=always
 TimeoutStartSec=300
 
