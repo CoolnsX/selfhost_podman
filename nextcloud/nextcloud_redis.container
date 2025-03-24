@@ -5,7 +5,7 @@ Description=Nextcloud Redis Container
 Pod=nextcloud.pod
 ContainerName=nextcloud_redis
 Image=docker.io/library/redis:alpine
-Exec=redis-server --unixsocket /tmp/docker/redis.sock --unixsocketperm 777
+Exec=--unixsocket /tmp/docker/redis.sock --unixsocketperm 777
 
 # Enable auto-update container
 AutoUpdate=registry

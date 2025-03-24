@@ -2,16 +2,18 @@
 Description=Nextcloud Imaginary Container
 
 [Container]
+Pod=nextcloud.pod
 ContainerName=nextcloud_imaginary
 Image=docker.io/nextcloud/aio-imaginary
-Exec="/start.sh -enable-url-source -cors -return-size"
+Exec=-enable-url-source -cors -return-size
 
 # Enable auto-update container
 AutoUpdate=registry
 # capabilities
 AddCapability=CAP_SYS_NICE
-Environment=PORT=11000
-PublishPort=11000:11000
+
+# this does not map any uid from host as this fucker doesn't like it.
+UserNS=auto
 
 [Service]
 Restart=always
