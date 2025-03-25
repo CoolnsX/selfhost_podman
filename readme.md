@@ -1,1 +1,1 @@
-# clone this repo as .config/containers/systemd and it will be detected by systemd
+# make the symlink of the folder you want to use as services to ~/.config/containers/
