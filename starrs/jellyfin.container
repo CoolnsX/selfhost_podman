@@ -13,8 +13,9 @@ EnvironmentFile=./.env
 Volume=%h/podman/starrs/jellyfin:/config
 Volume=${DATA}/media:/data
 
-# gpu
+# gpu acceleration
 AddDevice=/dev/dri
+GroupAdd=989
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env
