@@ -1,0 +1,22 @@
+[Unit]
+Description=HomeAssistant Container
+
+[Container]
+Pod=homeassistant.pod
+ContainerName=homeassistant
+Image=ghcr.io/home-assistant/home-assistant:stable
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Volume=%h/podman/homeassistant/config:/config
+Volume=/etc/localtime:/etc/localtime:ro
+Volume=/run/dbus:/run/dbus:ro
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

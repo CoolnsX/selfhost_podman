@@ -1,0 +1,21 @@
+[Unit]
+Description=ESPHome Container
+
+[Container]
+Pod=homeassistant.pod
+ContainerName=esphome
+Image=docker.io/esphome/esphome
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Volume=%h/podman/homeassistant/esphome:/config
+Volume=/etc/localtime:/etc/localtime:ro
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
