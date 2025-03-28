@@ -3,7 +3,7 @@ Description=Nextcloud Pod
 
 [Pod]
 PodName=nextcloud
-PublishPort=8080:80
+Network=host
 
 # to satisfy nextcloud bitch permissions problems
 UIDMap=1000:0:1
