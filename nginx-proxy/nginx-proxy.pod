@@ -1,0 +1,11 @@
+[Unit]
+Description=Nginx Proxy Pod
+
+[Pod]
+PodName=nginx-proxy
+Network=host
+#PublishPort=80:80
+#PublishPort=81:81
+#PublishPort=443:443
+#PublishPort=2222:22
+#PublishPort=3478:3478

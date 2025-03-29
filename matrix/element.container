@@ -1,0 +1,21 @@
+[Unit]
+Description=Element Container
+
+[Container]
+ContainerName=element
+Image=docker.io/vectorim/element-web:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+PublishPort=8089:80
+Sysctl=net.ipv4.ip_unprivileged_port_start=80
+
+Volume=./element-config.json:/app/config.json
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

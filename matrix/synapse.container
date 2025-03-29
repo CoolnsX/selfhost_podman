@@ -1,0 +1,36 @@
+[Unit]
+Description=Synapse Container
+Requires=nginx-proxy.service synapse_db.service
+After=nginx-proxy.service synapse_db.service
+
+[Container]
+Pod=nginx-proxy.pod
+ContainerName=synapse
+Image=docker.io/matrixdotorg/synapse:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+# pass this to attach it to container
+Environment=SYNAPSE_CONFIG_PATH=/data/homeserver.yaml
+Environment=SYNAPSE_SERVER_NAME=${SYNAPSE_SERVER_NAME}
+Environment=SYNAPSE_REPORT_STATS=yes
+Environment=POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+Environment=POSTGRES_USER=${POSTGRES_USER}
+Environment=POSTGRES_DB=${POSTGRES_DATABASE}
+Environment=POSTGRES_HOST=/tmp/matrix
+Environment=UID=0
+Environment=GID=0
+Environment=TZ=${TZ}
+
+Volume=%h/podman/matrix/synapse:/data
+Volume=%h/podman/matrix/.socket:/tmp/matrix
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/matrix/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

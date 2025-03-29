@@ -1,0 +1,21 @@
+[Unit]
+Description=Nginx Proxy Container
+
+[Container]
+Pod=nginx-proxy.pod
+ContainerName=nginx-proxy
+Image=docker.io/jc21/nginx-proxy-manager:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Volume=%h/podman/nginx-proxy/data:/data
+Volume=%h/podman/nginx-proxy/letsencrypt:/etc/letsencrypt
+Volume=./server_proxy.conf:/data/nginx/custom/server_proxy.conf
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

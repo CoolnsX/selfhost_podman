@@ -1,0 +1,25 @@
+[Unit]
+Description=Headscale Container
+Requires=nginx-proxy.service
+After=nginx-proxy.service
+
+[Container]
+Pod=nginx-proxy.pod
+ContainerName=headscale
+Image=docker.io/headscale/headscale:latest
+Exec=serve
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Volume=%h/podman/headscale/config:/etc/headscale
+Volume=%h/podman/headscale/data:/var/lib/headscale
+Volume=%h/podman/headscale/run:/var/run/headscale
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
