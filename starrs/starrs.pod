@@ -3,13 +3,15 @@ Description=STARRs Pod (Radarr, Sonarr, Bazarr, Prowlarr, Transmission, Jellyfin
 
 [Pod]
 PodName=starrs
-PublishPort=7878:7878
-PublishPort=8989:8989
-PublishPort=6767:6767
-PublishPort=9696:9696
-PublishPort=9091:9091
-PublishPort=51413:51413
-PublishPort=51413:51413/udp
-PublishPort=8096:8096
-PublishPort=7359:7359/udp
-PublishPort=1900:1900/udp
+#PublishPort=7878:7878
+#PublishPort=8989:8989
+#PublishPort=6767:6767
+#PublishPort=9696:9696
+#PublishPort=9091:9091
+#PublishPort=51413:51413
+#PublishPort=51413:51413/udp
+#PublishPort=8096:8096
+#PublishPort=7359:7359/udp
+#PublishPort=1900:1900/udp
+
+Network=host
