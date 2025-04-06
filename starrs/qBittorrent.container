@@ -1,18 +1,19 @@
 [Unit]
-Description=Transmission Container
+Description=qBittorrent Container
 
 [Container]
 Pod=starrs.pod
-ContainerName=transmission
-Image=lscr.io/linuxserver/transmission:latest
+ContainerName=qbittorrent
+Image=lscr.io/linuxserver/qbittorrent:latest
 
 # Enable auto-update container
 AutoUpdate=registry
 EnvironmentFile=./.env
+Environment=WEBUI_PORT=9090
+Environment=TORRENTING_PORT=6881
 
-Volume=%h/podman/starrs/transmission:/config
+Volume=%h/podman/starrs/qbittorrent:/config
 Volume=${DATA}/downloads:/downloads
-Volume=${DATA}/watch:/watch
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env
