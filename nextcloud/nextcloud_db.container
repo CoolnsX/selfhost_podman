@@ -13,7 +13,6 @@ AutoUpdate=registry
 EnvironmentFile=./.env
 
 Volume=%h/podman/nextcloud/db:/var/lib/mysql
-Volume=%h/podman/nextcloud/.socket:/tmp/docker
 
 [Service]
 # pass this to autofill above variables

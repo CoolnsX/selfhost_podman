@@ -1,5 +1,5 @@
 [Unit]
-Description=STARRs Pod (Radarr, Sonarr, Bazarr, Prowlarr, Transmission, Jellyfin)
+Description=STARRs Pod (Radarr, Sonarr, Bazarr, Prowlarr, qBittorrent, Jellyfin)
 
 [Pod]
 PodName=starrs

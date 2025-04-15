@@ -5,7 +5,7 @@ Description=Nextcloud Imaginary Container
 Pod=nextcloud.pod
 ContainerName=nextcloud_imaginary
 Image=docker.io/nextcloud/aio-imaginary
-Exec=-enable-url-source -cors -return-size
+Exec=-enable-url-source -cors
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -14,6 +14,10 @@ AddCapability=CAP_SYS_NICE
 
 # this does not map any uid from host as this fucker doesn't like it.
 UserNS=auto
+
+# disable healthcheck
+HealthCmd=none
+HealthInterval=disable
 
 [Service]
 Restart=always

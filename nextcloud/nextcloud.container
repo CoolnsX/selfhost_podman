@@ -14,7 +14,6 @@ AutoUpdate=registry
 EnvironmentFile=./.env
 
 Volume=%h/podman/nextcloud/config:/config
-Volume=%h/podman/nextcloud/.socket:/tmp/docker
 Volume=%h/nextcloud:/data
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
 
