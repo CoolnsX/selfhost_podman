@@ -1,18 +1,18 @@
 [Unit]
-Description=Nextcloud Redis Container
+Description=Nextcloud Valkey Container
 
 [Container]
 Pod=nextcloud.pod
-ContainerName=nextcloud_redis
-Image=docker.io/library/redis:alpine
-Exec=--unixsocket /tmp/docker/redis.sock --unixsocketperm 777
+ContainerName=nextcloud_valkey
+Image=docker.io/valkey/valkey:alpine
+Exec=--unixsocket /tmp/docker/valkey.sock --unixsocketperm 777
 
 # Enable auto-update container
 AutoUpdate=registry
 # pass this to attach it to container
 EnvironmentFile=./.env
 
-Volume=%h/podman/nextcloud/redis:/data
+Volume=%h/podman/nextcloud/valkey:/data
 
 [Service]
 # pass this to autofill above variables

@@ -1,7 +1,7 @@
 [Unit]
 Description=Nextcloud Container
-Requires=nextcloud_db.service nextcloud_redis.service
-After=nextcloud_db.service nextcloud_redis.service
+Requires=nextcloud_db.service nextcloud_valkey.service
+After=nextcloud_db.service nextcloud_valkey.service
 
 [Container]
 Pod=nextcloud.pod
