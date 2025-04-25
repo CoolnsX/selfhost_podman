@@ -11,6 +11,7 @@ AutoUpdate=registry
 EnvironmentFile=./.env
 Environment=WEBUI_PORT=9090
 Environment=TORRENTING_PORT=6881
+Environment=DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
 
 Volume=%h/podman/starrs/qbittorrent:/config
 Volume=${DATA}/downloads:/downloads
