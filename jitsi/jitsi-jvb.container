@@ -1,0 +1,21 @@
+[Unit]
+Description=Jitsi VideoBridge
+Requires=jitsi-prosody.service
+After=jitsi-prosody.service
+
+[Container]
+Pod=jitsi.pod
+ContainerName=jitsi-jvb
+Image=docker.io/jitsi/jvb:stable
+EnvironmentFile=./.env
+AutoUpdate=registry
+Volume=${CONFIG}/jvb:/config
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/jitsi/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

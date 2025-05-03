@@ -1,0 +1,17 @@
+[Unit]
+Description=Coturn Container
+
+[Container]
+Pod=nginx-proxy.pod
+ContainerName=coturn
+Image=docker.io/coturn/coturn:alpine
+
+# Enable auto-update container
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

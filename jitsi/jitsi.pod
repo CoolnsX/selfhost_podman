@@ -1,0 +1,10 @@
+[Unit]
+Description=Jitsi Pod
+
+[Pod]
+PodName=jitsi
+PublishPort=8000:80
+PublishPort=10000:10000
+AddHost=meet.jitsi:127.0.0.1
+AddHost=xmpp.meet.jitsi:127.0.0.1
+AddHost=jvb.meet.jitsi:127.0.0.1

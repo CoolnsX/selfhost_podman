@@ -1,0 +1,20 @@
+[Unit]
+Description=Jitsi Prosody XMPP Server
+
+[Container]
+Pod=jitsi.pod
+ContainerName=jitsi-prosody
+Image=docker.io/jitsi/prosody:stable
+EnvironmentFile=./.env
+AutoUpdate=registry
+Volume=${CONFIG}/prosody/config:/config
+Volume=${CONFIG}/prosody/prosody-plugins-custom:/prosody-plugins-custom
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/jitsi/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

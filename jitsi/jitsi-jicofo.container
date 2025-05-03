@@ -1,0 +1,21 @@
+[Unit]
+Description=Jitsi Jicofo
+Requires=jitsi-prosody.service
+After=jitsi-prosody.service
+
+[Container]
+Pod=jitsi.pod
+ContainerName=jitsi-jicofo
+Image=docker.io/jitsi/jicofo:stable
+EnvironmentFile=./.env
+AutoUpdate=registry
+Volume=${CONFIG}/jicofo:/config
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/jitsi/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

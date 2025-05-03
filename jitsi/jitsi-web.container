@@ -1,0 +1,24 @@
+[Unit]
+Description=Jitsi Web UI
+Requires=jitsi-jvb.container
+After=jitsi-jvb.container
+
+[Container]
+Pod=jitsi.pod
+ContainerName=jitsi-web
+Image=docker.io/jitsi/web:stable
+EnvironmentFile=./.env
+AutoUpdate=registry
+Volume=${CONFIG}/web:/config
+Volume=${CONFIG}/web/crontabs:/var/spool/cron/crontabs
+Volume=${CONFIG}/transcripts:/usr/share/jitsi-meet/transcripts
+Volume=${CONFIG}/web/load-test:/usr/share/jitsi-meet/load-test
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/jitsi/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
