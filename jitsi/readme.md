@@ -15,4 +15,4 @@ This directory contains all the stack required to setup Jitsi
     ```
 
 ## Major Problem
-- None, this is the only service that deployed painlessly. 😭
+- Took an entire fucking day to setup, scratching my head and found the second point above to do to make it working.
