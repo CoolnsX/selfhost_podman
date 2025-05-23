@@ -1,0 +1,25 @@
+[Unit]
+Description=Static Web Server Container
+
+[Container]
+Pod=nginx-proxy.pod
+ContainerName=my-website
+Image=ghcr.io/static-web-server/static-web-server:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+
+# pass this to attach it to container
+Environment=SERVER_ROOT=/var/my-website/public
+Environment=SERVER_CONFIG_FILE=/etc/config.toml
+
+Volume=%h/my-website:/var/my-website
+Volume=./config.toml:/etc/config.toml
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
