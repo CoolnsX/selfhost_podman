@@ -4,7 +4,7 @@ Description=ESPHome Container
 [Container]
 Pod=homeassistant.pod
 ContainerName=esphome
-Image=docker.io/esphome/esphome
+Image=ghcr.io/esphome/esphome
 
 # Enable auto-update container
 AutoUpdate=registry
