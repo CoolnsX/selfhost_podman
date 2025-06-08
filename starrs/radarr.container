@@ -4,7 +4,7 @@ Description=Radarr Container
 [Container]
 Pod=starrs.pod
 ContainerName=radarr
-Image=lscr.io/linuxserver/radarr:latest
+Image=ghcr.io/linuxserver/radarr:latest
 
 # Enable auto-update container
 AutoUpdate=registry

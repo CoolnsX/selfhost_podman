@@ -4,7 +4,7 @@ Description=qBittorrent Container
 [Container]
 Pod=starrs.pod
 ContainerName=qbittorrent
-Image=lscr.io/linuxserver/qbittorrent:latest
+Image=ghcr.io/linuxserver/qbittorrent:latest
 
 # Enable auto-update container
 AutoUpdate=registry

@@ -4,7 +4,7 @@ Description=Prowlarr Container
 [Container]
 Pod=starrs.pod
 ContainerName=prowlarr
-Image=lscr.io/linuxserver/prowlarr:latest
+Image=ghcr.io/linuxserver/prowlarr:latest
 
 # Enable auto-update container
 AutoUpdate=registry

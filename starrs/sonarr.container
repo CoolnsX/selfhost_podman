@@ -4,7 +4,7 @@ Description=Sonarr Container
 [Container]
 Pod=starrs.pod
 ContainerName=sonarr
-Image=lscr.io/linuxserver/sonarr:latest
+Image=ghcr.io/linuxserver/sonarr:latest
 
 # Enable auto-update container
 AutoUpdate=registry

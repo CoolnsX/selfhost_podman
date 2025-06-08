@@ -4,7 +4,7 @@ Description=Jellyfin Container
 [Container]
 Pod=starrs.pod
 ContainerName=jellyfin
-Image=lscr.io/linuxserver/jellyfin:latest
+Image=ghcr.io/linuxserver/jellyfin:latest
 
 # Enable auto-update container
 AutoUpdate=registry
