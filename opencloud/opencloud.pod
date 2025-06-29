@@ -1,0 +1,13 @@
+[Unit]
+Description=Opencloud Pod
+
+[Pod]
+PodName=opencloud
+
+Network=host
+#PublishPort=9200:9200
+#PublishPort=9300:9300
+
+#to satisfy opencloud bitch permissions problems
+UIDMap=1000:0:1
+UIDMap=0:1:1000

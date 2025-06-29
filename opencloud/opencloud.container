@@ -1,0 +1,25 @@
+[Unit]
+Description=Opencloud Container
+
+[Container]
+Pod=opencloud.pod
+ContainerName=opencloud
+Image=docker.io/opencloudeu/opencloud-rolling:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+# pass this to attach it to container
+EnvironmentFile=./.env
+
+Volume=%h/podman/opencloud:/etc/opencloud
+Volume=${EXTERNAL_DIR}:/var/lib/opencloud
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/opencloud/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
