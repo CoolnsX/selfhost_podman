@@ -5,7 +5,7 @@ Description=Synapse Database Container
 Pod=nginx-proxy.pod
 ContainerName=synapse_db
 Image=docker.io/library/postgres:alpine
-Exec=postgres -c unix_socket_directories='/var/run/postgresql/,/tmp/matrix/' -c unix_socket_permissions=0770
+Exec=postgres -c unix_socket_directories='/var/run/postgresql/,/tmp/matrix/' -c unix_socket_permissions=0770 -c shared_buffers=2GB -c work_mem=64MB -c effective_cache_size=4GB
 
 # Enable auto-update container
 AutoUpdate=registry
