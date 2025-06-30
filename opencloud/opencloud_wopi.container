@@ -1,5 +1,7 @@
 [Unit]
 Description=Opencloud WOPIServer Container
+Requires=opencloud.service
+After=opencloud.service
 
 [Container]
 Pod=opencloud.pod

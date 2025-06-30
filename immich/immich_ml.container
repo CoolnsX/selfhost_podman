@@ -1,0 +1,28 @@
+[Unit]
+Description=Immich Machine Learning Container
+
+[Container]
+Pod=immich.pod
+ContainerName=immich_ml
+Image=ghcr.io/immich-app/immich-machine-learning:release
+
+# Enable auto-update container
+AutoUpdate=registry
+# pass this to attach it to container
+EnvironmentFile=./.env
+
+Volume=%h/podman/immich/ml:/cache
+
+# gpu acceleration
+AddDevice=/dev/dri
+GroupAdd=989
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/immich/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

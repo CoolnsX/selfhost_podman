@@ -1,0 +1,31 @@
+[Unit]
+Description=Immich Container
+Requires=immich_db.service immich_valkey.service
+After=immich_db.service immich_valkey.service
+
+[Container]
+Pod=immich.pod
+ContainerName=immich
+Image=ghcr.io/immich-app/immich-server:release
+
+# Enable auto-update container
+AutoUpdate=registry
+# pass this to attach it to container
+EnvironmentFile=./.env
+
+Volume=${UPLOAD_LOCATION}:/usr/src/app/upload
+Volume=/etc/localtime:/etc/localtime:ro
+
+# gpu acceleration
+AddDevice=/dev/dri
+GroupAdd=989
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/immich/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

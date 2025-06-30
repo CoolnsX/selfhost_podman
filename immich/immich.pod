@@ -1,0 +1,12 @@
+[Unit]
+Description=Immich Pod
+
+[Pod]
+PodName=immich
+#PublishPort=2283:2283
+Network=host
+Volume=%h/podman/immich/.socket:/tmp/immich
+
+# to satisfy immich bitch permissions problems
+UIDMap=1000:0:1
+UIDMap=0:1:1000

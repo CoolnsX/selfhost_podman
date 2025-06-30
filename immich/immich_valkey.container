@@ -1,0 +1,19 @@
+[Unit]
+Description=Immich Valkey Container
+
+[Container]
+Pod=immich.pod
+ContainerName=immich_valkey
+Image=docker.io/valkey/valkey:alpine
+Exec=--unixsocket /tmp/immich/valkey.sock --unixsocketperm 777
+
+# Enable auto-update container
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
