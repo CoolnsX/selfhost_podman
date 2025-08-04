@@ -4,7 +4,7 @@ Description=Immich Valkey Container
 [Container]
 Pod=immich.pod
 ContainerName=immich_valkey
-Image=docker.io/valkey/valkey:alpine
+Image=ghcr.io/valkey-io/valkey:alpine
 Exec=--unixsocket /tmp/immich/valkey.sock --unixsocketperm 777
 
 # Enable auto-update container

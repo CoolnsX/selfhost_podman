@@ -15,7 +15,7 @@ AutoUpdate=registry
 # pass this to attach it to container
 EnvironmentFile=./.env
 
-Volume=%h/podman/opencloud:/etc/opencloud
+Volume=%h/podman/opencloud/config:/etc/opencloud
 
 [Service]
 # pass this to autofill above variables

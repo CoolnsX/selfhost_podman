@@ -4,7 +4,7 @@ Description=Nextcloud Imaginary Container
 [Container]
 Pod=nextcloud.pod
 ContainerName=nextcloud_imaginary
-Image=docker.io/nextcloud/aio-imaginary
+Image=ghcr.io/nextcloud-releases/aio-imaginary
 Exec=-enable-url-source -cors
 
 # Enable auto-update container
