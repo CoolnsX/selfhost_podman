@@ -2,7 +2,7 @@
 Description=Synapse Database Container
 
 [Container]
-Pod=nginx-proxy.pod
+Pod=matrix.pod
 ContainerName=synapse_db
 Image=docker.io/library/postgres:alpine
 Exec=postgres -c unix_socket_directories='/var/run/postgresql/,/tmp/matrix/' -c unix_socket_permissions=0770 -c shared_buffers=2GB -c work_mem=64MB -c effective_cache_size=4GB
@@ -15,7 +15,6 @@ Environment=POSTGRES_USER=${POSTGRES_USER}
 Environment=POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
 
 Volume=%h/podman/matrix/database:/var/lib/postgresql/data
-Volume=%h/podman/matrix/.socket:/tmp/matrix
 
 [Service]
 # pass this to autofill above variables

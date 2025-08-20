@@ -1,10 +1,10 @@
 [Unit]
 Description=Synapse Container
-Requires=nginx-proxy.service synapse_db.service
-After=nginx-proxy.service synapse_db.service
+Requires=synapse_db.service
+After=synapse_db.service
 
 [Container]
-Pod=nginx-proxy.pod
+Pod=matrix.pod
 ContainerName=synapse
 Image=docker.io/matrixdotorg/synapse:latest
 
@@ -23,7 +23,6 @@ Environment=GID=0
 Environment=TZ=${TZ}
 
 Volume=%h/podman/matrix/synapse:/data
-Volume=%h/podman/matrix/.socket:/tmp/matrix
 
 [Service]
 # pass this to autofill above variables

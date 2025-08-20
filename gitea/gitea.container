@@ -12,7 +12,6 @@ Environment=DISABLE_REGISTRATION=true
 Environment=USER_UID=1000
 Environment=USER_GID=1000
 
-PublishPort=3001:3000
 PublishPort=2222:22
 
 UIDMap=1000:0:1
@@ -22,6 +21,7 @@ UIDMap=0:1:1000
 AddCapability=CAP_NET_BIND_SERVICE
 
 Volume=%h/podman/gitea:/data
+Volume=%h/podman/gitea/.socket:/tmp/gitea/
 Volume=/etc/timezone:/etc/timezone:ro
 Volume=/etc/localtime:/etc/localtime:ro
 

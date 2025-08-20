@@ -1,10 +1,8 @@
 [Unit]
 Description=Ntfy Container
-Requires=nginx-proxy.service
-After=nginx-proxy.service
 
 [Container]
-Pod=nginx-proxy.pod
+Network=host
 ContainerName=ntfy
 Image=docker.io/binwiederhier/ntfy:latest
 Exec=serve

@@ -1,0 +1,7 @@
+[Unit]
+Description=Matrix Pod
+
+[Pod]
+PodName=matrix
+Volume=%h/podman/matrix/.socket:/tmp/matrix
+#Network=host
