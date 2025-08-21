@@ -2,7 +2,6 @@
 Description=Ntfy Container
 
 [Container]
-Network=host
 ContainerName=ntfy
 Image=docker.io/binwiederhier/ntfy:latest
 Exec=serve
@@ -16,7 +15,9 @@ Environment=NTFY_BASE_URL=https://ntfy.coolans.dev
 Environment=NTFY_CACHE_FILE=/var/lib/ntfy/cache.db
 Environment=NTFY_AUTH_FILE=/var/lib/ntfy/auth.db
 Environment=NTFY_AUTH_DEFAULT_ACCESS=deny-all
-Environment=NTFY_LISTEN_HTTP=:7777
+Environment=NTFY_LISTEN_HTTP="-"
+Environment=NTFY_LISTEN_UNIX=/var/lib/ntfy/ntfy.sock
+Environment=NTFY_LISTEN_UNIX_MODE=0770
 Environment=NTFY_BEHIND_PROXY=true
 Environment=NTFY_ATTACHMENT_CACHE_DIR=/var/lib/ntfy/attachments
 Environment=NTFY_ENABLE_LOGIN=false

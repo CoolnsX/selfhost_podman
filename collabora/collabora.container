@@ -9,9 +9,9 @@ Image=docker.io/collabora/code:latest
 # Enable auto-update container
 AutoUpdate=registry
 # pass this to attach it to container
-Environment=extra_params="--o:remote_font_config.url=${CLOUD}/apps/richdocuments/settings/fonts.json --o:ssl.enable=false --o:ssl.termination=true --o:net.post_allow.host[0]=160.202.39.[0-9]{1,3} --o:net.post_allow_host[1]=100.64.0.[0-9]{1,3} --o:per_document.max_concurrency=12 --o:num_prespawn_children=12"
-Environment=aliasgroup1=${CLOUD}:443
-Environment=domain1=${CLOUD}:443
+Environment=extra_params="--o:remote_font_config.url=${CLOUD}/apps/richdocuments/settings/fonts.json --o:ssl.enable=false --o:ssl.termination=true --o:net.post_allow.host[0]=160.202.39.[0-9]{1,3} --o:net.post_allow_host[1]=100.64.0.[0-9]{1,3} --o:net.post_allow_host[2]=127.0.0.1 --o:per_document.max_concurrency=12 --o:num_prespawn_children=12"
+Environment=aliasgroup1=${CLOUD}
+Environment=domain1=${CLOUD}
 Environment=DONT_GEN_SSL_CERT=true
 Environment=server_name=${HOST}
 
