@@ -2,7 +2,7 @@
 Description=Nextcloud Imaginary Container
 
 [Container]
-Network=host
+Pod=nextcloud.pod
 ContainerName=nextcloud_imaginary
 Image=ghcr.io/nextcloud-releases/aio-imaginary
 Exec=-enable-url-source -cors

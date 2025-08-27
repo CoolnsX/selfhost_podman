@@ -4,8 +4,8 @@ Description=Nextcloud Pod
 [Pod]
 PodName=nextcloud
 Volume=%h/podman/nextcloud/.socket:/tmp/docker
-Network=host
 
 # to satisfy nextcloud bitch permissions problems
 UIDMap=1000:0:1
 UIDMap=0:1:1000
+UIDMap=65534:65534:1
