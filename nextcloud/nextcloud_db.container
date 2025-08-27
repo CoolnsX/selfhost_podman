@@ -5,7 +5,7 @@ Description=Nextcloud DB Container
 Pod=nextcloud.pod
 ContainerName=nextcloud_db
 Image=docker.io/library/mariadb:lts
-Exec='--transaction-isolation=READ-COMMITTED' '--log-bin=binlog' '--binlog-format=ROW' '--socket=/tmp/docker/mysqld.sock'
+Exec='--transaction-isolation=READ-COMMITTED' '--log-bin=binlog' '--binlog-format=ROW' '--socket=/tmp/docker/mysqld.sock' '--skip-networking'
 
 # Enable auto-update container
 AutoUpdate=registry

@@ -4,4 +4,4 @@ After=default.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/podman exec -u abc nextcloud php /app/www/public/cron.php
+ExecStart=/usr/bin/podman exec -u 1000 nextcloud php /var/www/html/cron.php

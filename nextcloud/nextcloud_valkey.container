@@ -5,7 +5,7 @@ Description=Nextcloud Valkey Container
 Pod=nextcloud.pod
 ContainerName=nextcloud_valkey
 Image=ghcr.io/valkey-io/valkey:alpine
-Exec=--unixsocket /tmp/docker/valkey.sock --unixsocketperm 777
+Exec=--port 0 --unixsocket /tmp/docker/valkey.sock --unixsocketperm 777
 
 # Enable auto-update container
 AutoUpdate=registry

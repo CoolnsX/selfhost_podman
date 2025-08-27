@@ -5,7 +5,7 @@ Description=Immich Database Container
 Pod=immich.pod
 ContainerName=immich_db
 Image=ghcr.io/immich-app/postgres:17-vectorchord0.4.3
-Exec=postgres -c shared_preload_libraries=vchord -c unix_socket_directories='/var/run/postgresql/,/tmp/immich/' -c unix_socket_permissions=0770 -c shared_buffers=2GB -c work_mem=64MB -c effective_cache_size=4GB
+Exec=postgres -c shared_preload_libraries=vchord -c unix_socket_directories='/var/run/postgresql/,/tmp/immich/' -c unix_socket_permissions=0770 -c shared_buffers=2GB -c work_mem=64MB -c effective_cache_size=4GB -c listen_addresses=''
 
 # Enable auto-update container
 AutoUpdate=registry

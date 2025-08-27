@@ -3,18 +3,30 @@ Description=Nextcloud Container
 Requires=nextcloud_db.service nextcloud_valkey.service
 After=nextcloud_db.service nextcloud_valkey.service
 
+AssertPathIsDirectory=%h/podman/nextcloud
+AssertPathIsDirectory=%h/podman/nextcloud/html
+AssertPathIsDirectory=%h/nextcloud
+
 [Container]
 Pod=nextcloud.pod
 ContainerName=nextcloud
-Image=ghcr.io/linuxserver/nextcloud:latest
+Image=docker.io/library/nextcloud:fpm-alpine
 
 # Enable auto-update container
 AutoUpdate=registry
 # pass this to attach it to container
-EnvironmentFile=./.env
+Environment=MYSQL_PASSWORD=${MARIADB_PASSWORD}
+Environment=MYSQL_DATABASE=${MARIADB_DATABASE}
+Environment=MYSQL_USER=${MARIADB_USER}
+Environment=MYSQL_HOST=localhost:/tmp/docker/mysqld.sock
+Environment=PHP_MEMORY_LIMIT=2G
+Environment=PHP_UPLOAD_LIMIT=100G
+Environment=PHP_OPCACHE_MEMORY_CONSUMPTION=256
+Environment=PHP_MAX_EXECUTION_TIME=7200
 
-Volume=%h/podman/nextcloud/config:/config
-Volume=%h/nextcloud:/data
+Volume=%h/podman/nextcloud/html:/var/www/html
+Volume=%h/nextcloud:/var/www/html/data
+Volume=%h/.config/containers/systemd/nextcloud/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
 
 [Service]
@@ -25,4 +37,3 @@ TimeoutStartSec=300
 
 [Install]
 WantedBy=default.target
-

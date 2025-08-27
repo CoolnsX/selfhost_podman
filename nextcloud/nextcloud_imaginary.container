@@ -2,18 +2,17 @@
 Description=Nextcloud Imaginary Container
 
 [Container]
-Pod=nextcloud.pod
+Network=host
 ContainerName=nextcloud_imaginary
 Image=ghcr.io/nextcloud-releases/aio-imaginary
 Exec=-enable-url-source -cors
 
 # Enable auto-update container
 AutoUpdate=registry
+Environment=PORT=9999
+
 # capabilities
 AddCapability=CAP_SYS_NICE
-
-# this does not map any uid from host as this fucker doesn't like it.
-UserNS=auto
 
 # disable healthcheck
 HealthCmd=none
