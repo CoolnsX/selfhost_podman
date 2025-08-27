@@ -11,8 +11,9 @@ AutoUpdate=registry
 Environment=DISABLE_REGISTRATION=true
 Environment=USER_UID=1000
 Environment=USER_GID=1000
+Environment=SSH_LISTEN_PORT=2222
 
-PublishPort=2222:22
+Network=host
 
 UIDMap=1000:0:1
 UIDMap=0:1:1000
