@@ -4,3 +4,5 @@ Description=HomeAssistant Pod
 [Pod]
 PodName=homeassistant
 Network=host
+
+UserNS=keep-id
