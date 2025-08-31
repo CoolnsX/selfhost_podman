@@ -10,6 +10,7 @@ Exec=-enable-url-source -cors
 # Enable auto-update container
 AutoUpdate=registry
 Environment=PORT=9999
+Environment=TZ=${TZ}
 
 # capabilities
 AddCapability=CAP_SYS_NICE
@@ -19,6 +20,7 @@ HealthCmd=none
 HealthInterval=disable
 
 [Service]
+EnvironmentFile=%h/.config/containers/systemd/nextcloud/.env
 Restart=always
 TimeoutStartSec=300
 

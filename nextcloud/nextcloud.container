@@ -14,15 +14,23 @@ Image=docker.io/library/nextcloud:fpm-alpine
 
 # Enable auto-update container
 AutoUpdate=registry
-# pass this to attach it to container
+
+Environment=TZ=${TZ}
+
+# DB credentials
 Environment=MYSQL_PASSWORD=${MARIADB_PASSWORD}
 Environment=MYSQL_DATABASE=${MARIADB_DATABASE}
 Environment=MYSQL_USER=${MARIADB_USER}
 Environment=MYSQL_HOST=localhost:/tmp/docker/mysqld.sock
+
+# PHP Optimizations
 Environment=PHP_MEMORY_LIMIT=2G
 Environment=PHP_UPLOAD_LIMIT=100G
 Environment=PHP_OPCACHE_MEMORY_CONSUMPTION=256
-Environment=PHP_MAX_EXECUTION_TIME=7200
+
+# Nextcloud Notify Push socket
+Environment=SOCKET_PATH=/tmp/docker/notify_push.sock
+
 
 Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
