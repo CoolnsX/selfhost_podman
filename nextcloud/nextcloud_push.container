@@ -1,0 +1,33 @@
+[Unit]
+Description=Nextcloud Notify Push Container
+Requires=nextcloud_db.service nextcloud_valkey.service nextcloud.service
+After=nextcloud_db.service nextcloud_valkey.service nextcloud.service
+
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud_push
+Image=docker.io/library/nextcloud:fpm-alpine
+Exec=/nextcloud-notify-push-entrypoint.sh
+User=1000
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Environment=TZ=${TZ}
+
+# Nextcloud Notify Push socket
+Environment=SOCKET_PATH=${SOCKET_PATH}
+Environment=NEXTCLOUD_URL=${NEXTCLOUD_URL}
+
+Volume=%h/podman/nextcloud/html:/var/www/html
+Volume=./nextcloud-notify-push-entrypoint.sh:/nextcloud-notify-push-entrypoint.sh
+Volume=%h/nextcloud:/var/www/html/data
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/nextcloud/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

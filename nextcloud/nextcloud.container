@@ -28,13 +28,9 @@ Environment=PHP_MEMORY_LIMIT=2G
 Environment=PHP_UPLOAD_LIMIT=100G
 Environment=PHP_OPCACHE_MEMORY_CONSUMPTION=256
 
-# Nextcloud Notify Push socket
-Environment=SOCKET_PATH=/tmp/docker/notify_push.sock
-
-
 Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
-Volume=%h/.config/containers/systemd/nextcloud/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
+Volume=./zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
 
 [Service]
