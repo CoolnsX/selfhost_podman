@@ -7,8 +7,9 @@ After=nextcloud_db.service nextcloud_valkey.service nextcloud.service
 Pod=nextcloud.pod
 ContainerName=nextcloud_push
 Image=docker.io/library/nextcloud:fpm-alpine
-Exec=/nextcloud-notify-push-entrypoint.sh
+Entrypoint=/nextcloud-notify-push-entrypoint.sh
 User=1000
+Group=1000
 
 # Enable auto-update container
 AutoUpdate=registry
