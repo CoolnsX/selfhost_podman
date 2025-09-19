@@ -17,6 +17,9 @@ AutoUpdate=registry
 
 Environment=TZ=${TZ}
 
+# Redis Credentials
+Environment=REDIS_HOST=/tmp/docker/valkey.sock
+
 # DB credentials
 Environment=MYSQL_PASSWORD=${MARIADB_PASSWORD}
 Environment=MYSQL_DATABASE=${MARIADB_DATABASE}
