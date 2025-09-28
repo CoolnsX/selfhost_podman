@@ -9,8 +9,9 @@ Exec=--port 0 --unixsocket ${REDIS_HOST} --unixsocketperm 777
 
 # Enable auto-update container
 AutoUpdate=registry
-# pass this to attach it to container
-EnvironmentFile=./.env
+
+# Timezone
+Environment=TZ=${TZ}
 
 Volume=%h/podman/nextcloud/valkey:/data
 
