@@ -14,11 +14,24 @@ Group=1000
 # Enable auto-update container
 AutoUpdate=registry
 
+# Timezone
 Environment=TZ=${TZ}
 
-# Nextcloud Notify Push socket
+# Nextcloud variables
 Environment=SOCKET_PATH=${SOCKET_PATH}
-Environment=NEXTCLOUD_URL=${NEXTCLOUD_URL}
+Environment=OVERWRITECLIURL=${OVERWRITECLIURL}
+Environment=OVERWRITEPROTOCOL=${OVERWRITEPROTOCOL}
+Environment=TRUSTED_PROXIES=${TRUSTED_PROXIES}
+
+# DB credentials
+Environment=MARIADB_PASSWORD=${MARIADB_PASSWORD}
+Environment=MARIADB_DATABASE=${MARIADB_DATABASE}
+Environment=MARIADB_USER=${MARIADB_USER}
+Environment=MARIADB_HOST=${MARIADB_HOST}
+
+# Redis
+Environment=REDIS_HOST=${REDIS_HOST}
+Environment=REDIS_HOST_PORT=${REDIS_HOST_PORT}
 
 Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=./nextcloud-notify-push-entrypoint.sh:/nextcloud-notify-push-entrypoint.sh

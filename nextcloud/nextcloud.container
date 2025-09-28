@@ -15,21 +15,14 @@ Image=docker.io/library/nextcloud:fpm-alpine
 # Enable auto-update container
 AutoUpdate=registry
 
-Environment=TZ=${TZ}
-
-# Redis Credentials
-Environment=REDIS_HOST=/tmp/docker/valkey.sock
-
-# DB credentials
+# DB credentials (only required when setting up first time)
 Environment=MYSQL_PASSWORD=${MARIADB_PASSWORD}
 Environment=MYSQL_DATABASE=${MARIADB_DATABASE}
 Environment=MYSQL_USER=${MARIADB_USER}
-Environment=MYSQL_HOST=localhost:/tmp/docker/mysqld.sock
+Environment=MYSQL_HOST=localhost:${MARIADB_HOST}
 
-# PHP Optimizations
-Environment=PHP_MEMORY_LIMIT=2G
-Environment=PHP_UPLOAD_LIMIT=100G
-Environment=PHP_OPCACHE_MEMORY_CONSUMPTION=256
+# env file
+EnvironmentFile=./.env
 
 Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
