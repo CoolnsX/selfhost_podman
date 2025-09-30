@@ -12,6 +12,7 @@ AutoUpdate=registry
 Volume=%h/podman/homeassistant/config:/config
 Volume=/etc/localtime:/etc/localtime:ro
 Volume=/run/dbus:/run/dbus:ro
+Volume=/tmp/unbound_stats:/tmp/unbound_stats
 
 [Service]
 Restart=always
