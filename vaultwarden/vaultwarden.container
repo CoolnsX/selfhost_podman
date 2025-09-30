@@ -1,0 +1,22 @@
+[Unit]
+Description=VaultWarden Container
+
+[Container]
+ContainerName=vaultwarden
+Image=ghcr.io/dani-garcia/vaultwarden:alpine
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Network=host
+
+Volume=%h/podman/vaultwarden:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/vaultwarden/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
