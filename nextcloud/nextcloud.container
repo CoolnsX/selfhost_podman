@@ -3,14 +3,11 @@ Description=Nextcloud Container
 Requires=nextcloud_db.service nextcloud_valkey.service
 After=nextcloud_db.service nextcloud_valkey.service
 
-AssertPathIsDirectory=%h/podman/nextcloud
-AssertPathIsDirectory=%h/podman/nextcloud/html
-AssertPathIsDirectory=%h/nextcloud
-
 [Container]
 Pod=nextcloud.pod
 ContainerName=nextcloud
 Image=docker.io/library/nextcloud:fpm-alpine
+Entrypoint=/nextcloud-entrypoint.sh
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -28,6 +25,7 @@ Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
 Volume=./zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
+Volume=./nextcloud-entrypoint.sh:/nextcloud-entrypoint.sh
 
 [Service]
 # pass this to autofill above variables

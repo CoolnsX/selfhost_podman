@@ -19,7 +19,7 @@ php occ app:install notify_push || true
 php occ app:enable notify_push || true
 
 echo "[*] Starting notify_push binary..."
-/var/www/html/apps/notify_push/bin/x86_64/notify_push &
+/var/www/html/custom_apps/notify_push/bin/x86_64/notify_push &
 NOTIFY_PID=$!
 
 # Wait for the socket to appear, max 30 seconds
