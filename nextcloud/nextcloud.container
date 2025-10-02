@@ -7,7 +7,7 @@ After=nextcloud_db.service nextcloud_valkey.service
 Pod=nextcloud.pod
 ContainerName=nextcloud
 Image=docker.io/library/nextcloud:fpm-alpine
-Entrypoint=["/bin/sh","-c","sed -i 's/www-data/1000/g' /entrypoint.sh && exec /entrypoint.sh php-fpm"]
+Entrypoint=/nextcloud-entrypoint.sh
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -23,7 +23,6 @@ EnvironmentFile=./.env
 
 Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
-Volume=./zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
 Volume=./nextcloud-entrypoint.sh:/nextcloud-entrypoint.sh
 
