@@ -14,6 +14,11 @@ cleanup() {
 }
 trap 'cleanup' TERM INT
 
+while ! curl -s --fail --max-time 15 "$NEXTCLOUD_URL/status.php" >/dev/null; do
+	echo "[*] Waiting for Nextcloud to start..."
+	sleep 5
+done
+
 echo "[*] Ensuring notify_push app is installed and enabled..."
 php occ app:install notify_push || true
 php occ app:enable notify_push || true
@@ -22,16 +27,22 @@ echo "[*] Starting notify_push binary..."
 /var/www/html/custom_apps/notify_push/bin/x86_64/notify_push &
 NOTIFY_PID=$!
 
-# Wait for the socket to appear, max 30 seconds
+# Wait for the socket to active and respond, max 30 seconds
 i=1
 while [ $i -le 6 ]; do
+	if [ -S "$SOCKET_PATH" ]; then
+		echo "[*] Socket file exists, testing HTTP response..."
+		if curl -s --max-time 5 --unix-socket "$SOCKET_PATH" http://localhost/ -o /dev/null; then
+			echo "[*] notify_push is ready, running occ notify_push:setup"
+			php occ notify_push:setup "${NEXTCLOUD_URL}/push" || true
+			break
+		else
+			echo "[!] Socket exists, but no HTTP response yet"
+		fi
+	fi
+
 	echo "[*] Waiting 5 seconds for notify_push to be ready... (try $i/6)"
 	sleep 5
-	if [ -S "$SOCKET_PATH" ]; then
-		echo "[*] Socket found, running occ notify_push:setup"
-		php occ notify_push:setup "${NEXTCLOUD_URL}/push" || true
-		break
-	fi
 	: $((i += 1))
 done
 
