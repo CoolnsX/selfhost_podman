@@ -11,6 +11,9 @@ set -eu
 # so that your nextcloud can run or update properly.		#
 #################################################################
 
+# fix nextcloud not setting Local Time zone
+apk add --no-cache tzdata
+
 # default to UID=1000 if not set
 TARGET_UID="${PUID:-1000}"
 
