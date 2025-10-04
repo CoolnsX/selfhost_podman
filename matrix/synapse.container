@@ -6,7 +6,7 @@ After=synapse_db.service
 [Container]
 Pod=matrix.pod
 ContainerName=synapse
-Image=docker.io/matrixdotorg/synapse:latest
+Image=ghcr.io/element-hq/synapse:latest
 
 # Enable auto-update container
 AutoUpdate=registry

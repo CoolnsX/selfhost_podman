@@ -4,7 +4,7 @@ Description=Headscale Container
 [Container]
 Network=host
 ContainerName=headscale
-Image=docker.io/headscale/headscale:latest
+Image=ghcr.io/juanfont/headscale:latest
 Exec=serve
 
 # Enable auto-update container

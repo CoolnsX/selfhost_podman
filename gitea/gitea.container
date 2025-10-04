@@ -3,7 +3,7 @@ Description=Gitea Container
 
 [Container]
 ContainerName=gitea
-Image=docker.io/gitea/gitea:latest
+Image=ghcr.io/go-gitea/gitea:latest
 
 # Enable auto-update container
 AutoUpdate=registry
