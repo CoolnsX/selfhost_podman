@@ -1,0 +1,22 @@
+[Unit]
+Description=Uptime Kuma Container
+
+[Container]
+ContainerName=uptime-kuma
+Image=docker.io/louislam/uptime-kuma:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Network=host
+
+# pass this to attach it to container
+Volume=%h/podman/uptime-kuma:/app/data
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
