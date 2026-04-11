@@ -1,0 +1,24 @@
+[Unit]
+Description=Soulseek Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=slskd
+Image=ghcr.io/slskd/slskd:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/slskd:/app
+Volume=${DATA}/downloads/soulseek:/downloads
+Volume=${DATA}/media/music:/music:ro
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

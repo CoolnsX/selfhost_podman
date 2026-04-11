@@ -1,0 +1,23 @@
+[Unit]
+Description=Navidrome Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=navidrome
+Image=ghcr.io/navidrome/navidrome:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/navidrome:/data
+Volume=${DATA}/media/music:/music:ro
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

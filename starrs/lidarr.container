@@ -1,0 +1,24 @@
+[Unit]
+Description=Lidarr Container
+
+[Container]
+Pod=starrs.pod
+ContainerName=lidarr
+#Image=ghcr.io/linuxserver/lidarr:latest
+Image=ghcr.io/linuxserver/lidarr:nightly
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/starrs/lidarr:/config
+Volume=${DATA}:/data
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+
