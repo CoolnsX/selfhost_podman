@@ -1,0 +1,10 @@
+[Unit]
+Description=Music Pod (Soulbeet, Slskd, Navidrome)
+
+[Pod]
+PodName=music
+#PublishPort=9765:9765
+#PublishPort=4533:4533
+#PublishPort=5030:5030
+
+Network=host

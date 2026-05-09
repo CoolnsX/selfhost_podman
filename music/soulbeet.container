@@ -1,0 +1,23 @@
+[Unit]
+Description=Soulbeet Container
+
+[Container]
+Pod=music.pod
+ContainerName=soulbeet
+Image=docker.io/docccccc/soulbeet:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+EnvironmentFile=./.env
+
+Volume=%h/podman/music/soulbeet:/data
+Volume=${DATA}:/mnt
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/music/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

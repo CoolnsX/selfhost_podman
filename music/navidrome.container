@@ -2,7 +2,7 @@
 Description=Navidrome Container
 
 [Container]
-Pod=starrs.pod
+Pod=music.pod
 ContainerName=navidrome
 Image=ghcr.io/navidrome/navidrome:latest
 
@@ -10,11 +10,11 @@ Image=ghcr.io/navidrome/navidrome:latest
 AutoUpdate=registry
 EnvironmentFile=./.env
 
-Volume=%h/podman/starrs/navidrome:/data
+Volume=%h/podman/music/navidrome:/data
 Volume=${DATA}/media/music:/music:ro
 
 [Service]
-EnvironmentFile=%h/.config/containers/systemd/starrs/.env
+EnvironmentFile=%h/.config/containers/systemd/music/.env
 Restart=always
 TimeoutStartSec=300
 
