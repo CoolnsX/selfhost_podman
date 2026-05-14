@@ -1,0 +1,20 @@
+[Unit]
+Description=BentoPDF container
+
+[Container]
+Network=host
+ContainerName=bentopdf
+Image=ghcr.io/alam00000/bentopdf-simple:latest
+
+Volume=%h/podman/bentopdf:/tmp
+Volume=./nginx-listen-on-unix.sh:/docker-entrypoint.d/99-nginx-listen-on-unix.sh:ro
+
+# Enable auto-update container
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
