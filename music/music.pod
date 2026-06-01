@@ -1,5 +1,5 @@
 [Unit]
-Description=Music Pod (Soulbeet, Slskd, Navidrome)
+Description=Music Pod (Picard, Slskd, Navidrome)
 
 [Pod]
 PodName=music

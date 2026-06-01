@@ -8,7 +8,10 @@ Image=ghcr.io/aandree5/picard-web:minimal-v1
 
 # Enable auto-update container
 AutoUpdate=registry
-EnvironmentFile=./.env
+Environment=PUID=${PUID}
+Environment=PGID=${PGID}
+Environment=TZ=${TZ}
+Environment=GWB_HOME=/root
 
 Volume=%h/podman/music/picard:/root
 Volume=${DATA}:/mnt
