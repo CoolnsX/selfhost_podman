@@ -3,7 +3,7 @@ Description=Uptime Kuma Container
 
 [Container]
 ContainerName=uptime-kuma
-Image=docker.io/louislam/uptime-kuma:latest
+Image=ghcr.io/louislam/uptime-kuma:2-slim
 
 # Enable auto-update container
 AutoUpdate=registry
