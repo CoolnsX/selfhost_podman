@@ -1,18 +1,16 @@
 [Unit]
-Description=Lidarr Container
+Description=Seer Container
 
 [Container]
 Pod=starrs.pod
-ContainerName=lidarr
-#Image=ghcr.io/linuxserver/lidarr:latest
-Image=ghcr.io/linuxserver/lidarr:nightly
+ContainerName=seer
+Image=ghcr.io/seerr-team/seerr:latest
 
 # Enable auto-update container
 AutoUpdate=registry
 EnvironmentFile=./.env
 
-Volume=%h/podman/starrs/lidarr:/config
-Volume=${DATA}:/data
+Volume=%h/podman/starrs/seer:/app/config
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env

@@ -1,16 +1,16 @@
 [Unit]
-Description=Soulbeet Container
+Description=Picard Container
 
 [Container]
 Pod=music.pod
-ContainerName=soulbeet
-Image=docker.io/docccccc/soulbeet:latest
+ContainerName=picard
+Image=ghcr.io/aandree5/picard-web:minimal-v1
 
 # Enable auto-update container
 AutoUpdate=registry
 EnvironmentFile=./.env
 
-Volume=%h/podman/music/soulbeet:/data
+Volume=%h/podman/music/picard:/root
 Volume=${DATA}:/mnt
 
 [Service]
