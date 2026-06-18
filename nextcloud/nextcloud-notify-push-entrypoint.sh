@@ -3,7 +3,8 @@
 # env exports
 export NEXTCLOUD_URL="${NEXTCLOUD_URL:-$OVERWRITECLIURL}"
 export REDIS_URL="redis+unix://${REDIS_HOST}"
-export DATABASE_URL="mysql://${MARIADB_USER}:${MARIADB_PASSWORD}@localhost/${MARIADB_DATABASE}?socket=${MARIADB_HOST}"
+export DATABASE_URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost/${POSTGRES_DB}?host=${POSTGRES_HOST}"
+
 export DATABASE_PREFIX="oc_"
 
 # Clean shutdown handler

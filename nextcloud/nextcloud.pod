@@ -4,6 +4,8 @@ Description=Nextcloud Pod
 [Pod]
 PodName=nextcloud
 Volume=%h/podman/nextcloud/.socket:/tmp/docker
+Volume=/run/postgresql:/run/postgresql
+Volume=/run/valkey:/run/valkey
 
 # to satisfy nextcloud bitch permissions problems
 UIDMap=1000:0:1

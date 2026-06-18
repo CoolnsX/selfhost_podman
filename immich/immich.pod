@@ -6,3 +6,5 @@ PodName=immich
 #PublishPort=2283:2283
 Network=host
 Volume=%h/podman/immich/.socket:/tmp/immich
+Volume=/run/postgresql:/run/postgresql
+Volume=/run/valkey:/run/valkey

@@ -1,7 +1,7 @@
 [Unit]
 Description=Immich Container
-Requires=immich_db.service immich_valkey.service
-After=immich_db.service immich_valkey.service
+# Requires=immich_db.service immich_valkey.service
+# After=immich_db.service immich_valkey.service
 
 [Container]
 Pod=immich.pod
