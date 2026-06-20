@@ -12,12 +12,6 @@ Entrypoint=/nextcloud-entrypoint.sh
 # Enable auto-update container
 AutoUpdate=registry
 
-# DB credentials (only required when setting up first time)
-Environment=MYSQL_PASSWORD=${MARIADB_PASSWORD}
-Environment=MYSQL_DATABASE=${MARIADB_DATABASE}
-Environment=MYSQL_USER=${MARIADB_USER}
-Environment=MYSQL_HOST=localhost:${MARIADB_HOST}
-
 # env file
 EnvironmentFile=./.env
 
@@ -25,6 +19,9 @@ Volume=%h/podman/nextcloud/html:/var/www/html
 Volume=%h/nextcloud:/var/www/html/data
 Volume=${EXTERNAL_DIR}:${EXTERNAL_DIR}
 Volume=./nextcloud-entrypoint.sh:/nextcloud-entrypoint.sh
+
+# notify push
+Volume=./install-notify-push.sh:/docker-entrypoint-hooks.d/before-starting/install-notify-push.sh
 
 [Service]
 # pass this to autofill above variables

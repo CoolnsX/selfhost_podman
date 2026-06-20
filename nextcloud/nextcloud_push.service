@@ -1,0 +1,18 @@
+[Unit]
+Requires=nextcloud.service
+After=nextcloud.service
+
+Description=Push daemon for Nextcloud clients
+Documentation=https://github.com/nextcloud/notify_push
+
+[Service]
+Environment=SOCKET_PATH=%h/podman/nextcloud/.socket/notify_push.sock
+
+ExecStart=%h/podman/nextcloud/html/custom_apps/notify_push/bin/x86_64/notify_push %h/podman/nextcloud/html/config/config.php
+
+Type=notify
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,35 @@
+[Unit]
+Description=Nextcloud Notify Push Container
+Requires=nextcloud.service
+After=nextcloud.service
+
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud_push
+Image=ghcr.io/nextcloud/notify_push:latest
+User=1000
+Group=1000
+
+# Enable auto-update container
+AutoUpdate=registry
+
+# Timezone
+Environment=TZ=${TZ}
+
+# Nextcloud variables
+Environment=SOCKET_PATH=${SOCKET_PATH}
+Environment=NEXTCLOUD_URL=${OVERWRITECLIURL}
+Environment=TRUSTED_PROXIES=${TRUSTED_PROXIES}
+
+# DB credentials
+Environment=REDIS_URL=redis+unix://${REDIS_HOST}
+Environment=DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost/${POSTGRES_DB}?host=${POSTGRES_HOST}
+
+[Service]
+# pass this to autofill above variables
+EnvironmentFile=%h/.config/containers/systemd/nextcloud/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
