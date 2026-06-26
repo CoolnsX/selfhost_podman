@@ -1,5 +1,7 @@
 [Unit]
 Description=Immich Machine Learning Container
+Requires=immich.service
+After=immich.service
 
 [Container]
 Pod=immich.pod
