@@ -20,7 +20,9 @@ Environment=NTFY_LISTEN_UNIX=/var/lib/ntfy/ntfy.sock
 Environment=NTFY_LISTEN_UNIX_MODE=0770
 Environment=NTFY_BEHIND_PROXY=true
 Environment=NTFY_ATTACHMENT_CACHE_DIR=/var/lib/ntfy/attachments
-Environment=NTFY_ENABLE_LOGIN=false
+Environment=NTFY_ENABLE_LOGIN=true
+Environment=NTFY_REQUIRE_LOGIN=true
+Environment=NTFY_TEMPLATE_DIR=/var/lib/ntfy/templates
 
 Volume=%h/podman/ntfy:/var/lib/ntfy
 
