@@ -6,6 +6,8 @@ Pod=homeassistant.pod
 ContainerName=esphome
 Image=ghcr.io/esphome/esphome
 
+Environment=TZ=Asia/Kolkata
+
 # Enable auto-update container
 AutoUpdate=registry
 
