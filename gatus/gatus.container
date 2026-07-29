@@ -1,0 +1,25 @@
+[Unit]
+Description=Gatus Container
+
+[Container]
+ContainerName=gatus
+Image=ghcr.io/twin/gatus:latest
+
+# Enable auto-update container
+AutoUpdate=registry
+
+# DNS
+AddHost=${DNS_HOST_1}
+AddHost=${DNS_HOST_2}
+
+Network=host
+
+Volume=%h/podman/gatus:/config
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/gatus/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
