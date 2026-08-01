@@ -8,6 +8,9 @@ Image=ghcr.io/twin/gatus:latest
 # Enable auto-update container
 AutoUpdate=registry
 
+Environment=TZ=${TZ}
+Environment=DOMAIN=${DOMAIN}
+
 # DNS
 AddHost=${DNS_HOST_1}
 AddHost=${DNS_HOST_2}

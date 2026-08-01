@@ -1,9 +1,9 @@
 [Unit]
-Description=Gitea Container
+Description=Forgejo Container
 
 [Container]
-ContainerName=gitea
-Image=ghcr.io/go-gitea/gitea:latest
+ContainerName=forgejo
+Image=codeberg.org/forgejo/forgejo:16
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -21,8 +21,8 @@ UIDMap=0:1:1000
 # capabilities
 AddCapability=CAP_NET_BIND_SERVICE
 
-Volume=%h/podman/gitea:/data
-Volume=%h/podman/gitea/.socket:/tmp/gitea/
+Volume=%h/podman/forgejo:/data
+Volume=%h/podman/forgejo/.socket:/tmp/forgejo/
 Volume=/etc/localtime:/etc/localtime:ro
 
 [Service]
