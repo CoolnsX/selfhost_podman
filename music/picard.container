@@ -4,17 +4,19 @@ Description=Picard Container
 [Container]
 Pod=music.pod
 ContainerName=picard
-Image=ghcr.io/aandree5/picard-web:minimal-v1
+Image=ghcr.io/jlesage/musicbrainz-picard:latest
 
 # Enable auto-update container
 AutoUpdate=registry
-Environment=PUID=${PUID}
-Environment=PGID=${PGID}
+Environment=USER_ID=${PUID}
+Environment=GROUP_ID=${PGID}
 Environment=TZ=${TZ}
-Environment=GWB_HOME=/root
+#Environment=KEEP_APP_RUNNING=1
+Environment=ENABLE_CJK_FONT=1
+Environment=DARK_MODE=1
 
-Volume=%h/podman/music/picard:/root
-Volume=${DATA}:/mnt
+Volume=%h/podman/music/picard:/config
+Volume=${DATA}:/storage
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/music/.env
