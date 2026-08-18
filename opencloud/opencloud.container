@@ -2,9 +2,17 @@
 Description=Opencloud Container
 
 [Container]
-Pod=opencloud.pod
 ContainerName=opencloud
-Image=docker.io/opencloudeu/opencloud-rolling:latest
+Image=quay.io/opencloudeu/opencloud-rolling:latest
+Entrypoint=/bin/sh
+Exec=-c "opencloud init || true; opencloud server"
+
+#Network=host
+PublishPort=127.0.0.1:9200:9200
+PublishPort=100.64.0.1:9200:9200
+
+# this is required as opencloud won't work otherwise
+AddHost=${DNSHOST1}
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -13,10 +21,13 @@ EnvironmentFile=./.env
 
 # metadata and configuration store here
 Volume=%h/podman/opencloud/config:/etc/opencloud
-Volume=%h/podman/opencloud/data:/var/lib/opencloud
 
 # actual data store here
-Volume=${EXTERNAL_DIR}:/var/lib/opencloud/storage/users/users
+Volume=${EXTERNAL_DIR}:/var/lib/opencloud
+
+#to satisfy opencloud bitch permissions problems
+UIDMap=1000:0:1
+UIDMap=0:1:1000
 
 [Service]
 # pass this to autofill above variables
