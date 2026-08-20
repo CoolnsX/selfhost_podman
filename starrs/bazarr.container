@@ -12,6 +12,7 @@ EnvironmentFile=./.env
 
 Volume=%h/podman/starrs/bazarr:/config
 Volume=${DATA}:/data
+Volume=${BACKUP}/bazarr:/config/backup
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env

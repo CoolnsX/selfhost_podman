@@ -1,0 +1,22 @@
+[Unit]
+Description=Memo Container
+
+[Container]
+Pod=memos.pod
+ContainerName=memos
+Image=ghcr.io/usememos/memos:stable
+
+# Enable auto-update container
+AutoUpdate=registry
+# pass this to attach it to container
+EnvironmentFile=./.env
+
+Volume=%h/podman/notes/memos:/var/opt/memos
+
+[Service]
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target
+

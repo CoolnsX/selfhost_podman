@@ -12,6 +12,7 @@ EnvironmentFile=./.env
 
 Volume=%h/podman/starrs/jellyfin:/config
 Volume=${DATA}/media:/data
+Volume=${BACKUP}/jellyfin:/config/data/data/backups
 
 # gpu acceleration
 AddDevice=/dev/dri

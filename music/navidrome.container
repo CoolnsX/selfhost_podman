@@ -12,6 +12,7 @@ EnvironmentFile=./.env
 
 Volume=%h/podman/music/navidrome:/data
 Volume=${DATA}/media/music:/music:ro
+Volume=${BACKUP}/navidrome:${ND_BACKUP_PATH}
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/music/.env
