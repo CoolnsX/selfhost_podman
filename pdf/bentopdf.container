@@ -6,11 +6,13 @@ Network=host
 ContainerName=bentopdf
 Image=ghcr.io/alam00000/bentopdf-simple:latest
 
+# Enable auto-update container
+AutoUpdate=registry
+
 Volume=%h/podman/bentopdf:/tmp
 Volume=./nginx-listen-on-unix.sh:/docker-entrypoint.d/99-nginx-listen-on-unix.sh:ro
 
-# Enable auto-update container
-AutoUpdate=registry
+UIDMap=101:0:1
 
 [Service]
 Restart=always

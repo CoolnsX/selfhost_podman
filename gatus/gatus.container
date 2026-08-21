@@ -10,6 +10,7 @@ AutoUpdate=registry
 
 Environment=TZ=${TZ}
 Environment=DOMAIN=${DOMAIN}
+Environment=GATUS_LOG_LEVEL=${GATUS_LOG_LEVEL}
 
 # DNS
 AddHost=${DNS_HOST_1}
