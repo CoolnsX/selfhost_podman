@@ -1,7 +1,0 @@
-[Unit]
-Description=Memos Pod
-
-[Pod]
-PodName=memos
-Network=host
-#Volume=%h/podman/notes/.socket:/tmp/memos

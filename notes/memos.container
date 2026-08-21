@@ -2,9 +2,10 @@
 Description=Memo Container
 
 [Container]
-Pod=memos.pod
 ContainerName=memos
 Image=ghcr.io/usememos/memos:stable
+
+Network=host
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -12,6 +13,7 @@ AutoUpdate=registry
 EnvironmentFile=./.env
 
 Volume=%h/podman/notes/memos:/var/opt/memos
+Volume=%h/podman/notes/.socket:/tmp/memos
 
 [Service]
 Restart=always
