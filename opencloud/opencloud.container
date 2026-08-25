@@ -5,7 +5,7 @@ Description=Opencloud Container
 ContainerName=opencloud
 Image=quay.io/opencloudeu/opencloud-rolling:latest
 Entrypoint=/bin/sh
-Exec=-c "opencloud init || true; opencloud server"
+Exec=-c "mkdir -p '/tmp/opencloud';opencloud init || true; opencloud server"
 
 #Network=host
 PublishPort=127.0.0.1:9200:9200
@@ -18,9 +18,11 @@ AddHost=${DNSHOST1}
 AutoUpdate=registry
 # pass this to attach it to container
 EnvironmentFile=./.env
+EnvironmentFile=./unix.env
 
 # metadata and configuration store here
 Volume=%h/podman/opencloud/config:/etc/opencloud
+Volume=%h/podman/opencloud/apps:/var/lib/opencloud/web/assets/apps
 
 # actual data store here
 Volume=${EXTERNAL_DIR}:/var/lib/opencloud
