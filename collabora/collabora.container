@@ -14,6 +14,9 @@ Environment=aliasgroup1=https://${CLOUD}
 Environment=DONT_GEN_SSL_CERT=true
 Environment=server_name=${HOST}
 
+# disable healthcheck
+HealthCmd=none
+
 [Service]
 # pass this to autofill above variables
 EnvironmentFile=%h/.config/containers/systemd/collabora/.env
