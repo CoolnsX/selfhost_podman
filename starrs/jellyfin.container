@@ -16,7 +16,7 @@ Volume=${BACKUP}/jellyfin:/config/data/data/backups
 
 # gpu acceleration
 AddDevice=/dev/dri
-GroupAdd=989
+GroupAdd=video
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/starrs/.env

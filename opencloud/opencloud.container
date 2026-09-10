@@ -34,7 +34,9 @@ UIDMap=0:1:1000
 [Service]
 # pass this to autofill above variables
 EnvironmentFile=%h/.config/containers/systemd/opencloud/.env
+ExecStartPre=%h/scripts/oc_update_app no_restart
 Restart=always
+RestartSec=10
 TimeoutStartSec=300
 
 [Install]

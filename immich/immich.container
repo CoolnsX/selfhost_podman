@@ -16,9 +16,13 @@ EnvironmentFile=./.env
 Volume=${UPLOAD_LOCATION}:/usr/src/app/upload
 Volume=/etc/localtime:/etc/localtime:ro
 
+# db and valkey
+Volume=/run/postgresql:/run/postgresql
+Volume=/run/valkey:/run/valkey
+
 # gpu acceleration
 AddDevice=/dev/dri
-GroupAdd=989
+GroupAdd=video
 
 [Service]
 # pass this to autofill above variables

@@ -6,7 +6,7 @@ After=immich.service
 [Container]
 Pod=immich.pod
 ContainerName=immich_ml
-Image=ghcr.io/immich-app/immich-machine-learning:release
+Image=ghcr.io/immich-app/immich-machine-learning:release-rocm
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -17,7 +17,8 @@ Volume=%h/podman/immich/ml:/cache
 
 # gpu acceleration
 AddDevice=/dev/dri
-GroupAdd=989
+AddDevice=/dev/kfd
+GroupAdd=video
 
 [Service]
 # pass this to autofill above variables
