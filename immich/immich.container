@@ -15,6 +15,7 @@ EnvironmentFile=./.env
 
 Volume=${UPLOAD_LOCATION}:/usr/src/app/upload
 Volume=/etc/localtime:/etc/localtime:ro
+Volume=%h/podman/immich/immich:/data
 
 # db and valkey
 Volume=/run/postgresql:/run/postgresql

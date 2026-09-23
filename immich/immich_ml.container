@@ -12,6 +12,7 @@ Image=ghcr.io/immich-app/immich-machine-learning:release-rocm
 AutoUpdate=registry
 # pass this to attach it to container
 EnvironmentFile=./.env
+Environment=GUNICORN_CMD_ARGS="--log-level warning"
 
 Volume=%h/podman/immich/ml:/cache
 
