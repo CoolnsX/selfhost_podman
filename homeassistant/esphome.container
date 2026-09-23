@@ -5,8 +5,9 @@ Description=ESPHome Container
 Pod=homeassistant.pod
 ContainerName=esphome
 Image=ghcr.io/esphome/esphome
+Exec=dashboard /config --log-level warning
 
-Environment=TZ=Asia/Kolkata
+EnvironmentFile=./.env
 
 # Enable auto-update container
 AutoUpdate=registry
