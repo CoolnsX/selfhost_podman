@@ -23,6 +23,7 @@ Environment=NTFY_ATTACHMENT_CACHE_DIR=/var/lib/ntfy/attachments
 Environment=NTFY_ENABLE_LOGIN=true
 Environment=NTFY_REQUIRE_LOGIN=true
 Environment=NTFY_TEMPLATE_DIR=/var/lib/ntfy/templates
+Environment=NTFY_LOG_LEVEL=warn
 
 Volume=%h/podman/ntfy:/var/lib/ntfy
 

@@ -11,4 +11,4 @@ entrypoint_log() {
 SOCKET="${NGINX_SOCKET:-/tmp/nginx.sock}"
 
 entrypoint_log "[coolans] Changing Nginx listen port to $SOCKET"
-sed -i -e "s|listen 8080;|listen unix:${SOCKET};|" -e "/listen \[::\]:8080;/d" /etc/nginx/nginx.conf
+sed -i -e "s|listen 8080;|listen unix:${SOCKET};|" -e "s|listen \[::\]:8080;|access_log off;|" /etc/nginx/nginx.conf
