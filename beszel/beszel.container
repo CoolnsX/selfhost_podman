@@ -1,0 +1,25 @@
+[Unit]
+Description=Beszel Hub container
+
+[Container]
+Network=host
+ContainerName=beszel
+Image=ghcr.io/henrygd/beszel/beszel:latest
+Exec=serve --http "localhost:8090"
+
+# Enable auto-update container
+AutoUpdate=registry
+
+Environment=APP_URL=${APP_URL}
+Environment=DISABLE_SSH=true
+
+Volume=%h/podman/beszel/data:/beszel_data
+Volume=%h/podman/beszel/socket:/beszel_socket
+
+[Service]
+EnvironmentFile=%h/.config/containers/systemd/beszel/.env
+Restart=always
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

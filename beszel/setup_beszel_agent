@@ -1,0 +1,71 @@
+#!/bin/sh
+set -eu
+
+if [ "$(id -u)" -eq 0 ];then
+    echo "Run as normal user, not root." >&2
+    exit 1
+fi
+
+USER_NAME=$(id -un)
+CONF="$HOME/.config/beszel-agent"
+BIN="/usr/local/bin/beszel-agent"
+SERVICE="/etc/systemd/system/beszel-agent.service"
+
+mkdir -p "$CONF"
+
+printf 'Hub URL (e.g. https://beszel.example.com): '
+read -r HUB_URL
+printf 'Hub public key: '
+read -r KEY
+printf 'System token: '
+read -r TOKEN
+
+case "$(uname -m)" in
+    x86_64) ARCH=amd64 ;;
+    aarch64) ARCH=arm64 ;;
+    *) echo "Unsupported architecture" >&2; exit 1 ;;
+esac
+
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' 0
+trap 'exit 1' HUP INT TERM
+
+curl -fsSL "https://github.com/henrygd/beszel/releases/latest/download/beszel-agent_Linux_${ARCH}.tar.gz" -o - | tar -xzf - -C "$TMP" beszel-agent
+
+umask 077
+cat > "$CONF/agent.env" <<EOF
+HUB_URL=$HUB_URL
+KEY=$KEY
+TOKEN=$TOKEN
+DISABLE_SSH=true
+LOG_LEVEL=warn
+EXCLUDE_CONTAINERS="*-infra"
+EOF
+
+doas install -m 755 "$TMP/beszel-agent" "$BIN"
+
+doas tee "$SERVICE" >/dev/null <<EOF
+[Unit]
+Description=Beszel Agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=$USER_NAME
+EnvironmentFile=$CONF/agent.env
+ExecStart=$BIN
+Restart=on-failure
+RestartSec=5
+
+AmbientCapabilities=CAP_SYS_RAWIO CAP_SYS_ADMIN
+CapabilityBoundingSet=CAP_SYS_RAWIO CAP_SYS_ADMIN
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+doas systemctl daemon-reload
+doas systemctl enable --now beszel-agent
+
+echo "Beszel Agent installed."
