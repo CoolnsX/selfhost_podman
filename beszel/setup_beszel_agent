@@ -7,9 +7,11 @@ if [ "$(id -u)" -eq 0 ];then
 fi
 
 USER_NAME=$(id -un)
-CONF="$HOME/.config/beszel-agent"
-BIN="/usr/local/bin/beszel-agent"
-SERVICE="/etc/systemd/system/beszel-agent.service"
+FILENAME="beszel-agent"
+CONF="$HOME/.config/${FILENAME}"
+BIN="/usr/local/bin/${FILENAME}"
+SERVICE="/etc/systemd/system/${FILENAME}.service"
+AUTO_UPDATE="/etc/systemd/system/${FILENAME}-update"
 
 mkdir -p "$CONF"
 
@@ -27,12 +29,13 @@ case "$(uname -m)" in
 esac
 
 TMP=$(mktemp -d)
-trap 'rm -rf "$TMP"' 0
+trap "rm -rf '$TMP'" 0
 trap 'exit 1' HUP INT TERM
 
-curl -fsSL "https://github.com/henrygd/beszel/releases/latest/download/beszel-agent_Linux_${ARCH}.tar.gz" -o - | tar -xzf - -C "$TMP" beszel-agent
+curl -fsSL "https://github.com/henrygd/beszel/releases/latest/download/${FILENAME}_Linux_${ARCH}.tar.gz" -o - | tar -xzf - -C "$TMP" ${FILENAME}
 
-umask 077
+[ -s "$TMP/$FILENAME" ] || exit 1
+
 cat > "$CONF/agent.env" <<EOF
 HUB_URL=$HUB_URL
 KEY=$KEY
@@ -42,7 +45,7 @@ LOG_LEVEL=warn
 EXCLUDE_CONTAINERS="*-infra"
 EOF
 
-doas install -m 755 "$TMP/beszel-agent" "$BIN"
+doas install -m 755 "$TMP/${FILENAME}" "$BIN"
 
 doas tee "$SERVICE" >/dev/null <<EOF
 [Unit]
@@ -58,6 +61,19 @@ ExecStart=$BIN
 Restart=on-failure
 RestartSec=5
 
+# Security / sandboxing
+KeyringMode=private
+LockPersonality=yes
+NoNewPrivileges=yes
+ProtectClock=yes
+ProtectHome=read-only
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectSystem=strict
+RemoveIPC=yes
+RestrictSUIDSGID=true
+PrivateTmp=yes
+
 AmbientCapabilities=CAP_SYS_RAWIO CAP_SYS_ADMIN
 CapabilityBoundingSet=CAP_SYS_RAWIO CAP_SYS_ADMIN
 
@@ -65,7 +81,32 @@ CapabilityBoundingSet=CAP_SYS_RAWIO CAP_SYS_ADMIN
 WantedBy=multi-user.target
 EOF
 
-doas systemctl daemon-reload
-doas systemctl enable --now beszel-agent
+doas tee "${AUTO_UPDATE}.service" >/dev/null <<EOF
+[Unit]
+Description=Update Beszel Agent
+Wants=network-online.target
+After=network-online.target
 
-echo "Beszel Agent installed."
+[Service]
+Type=oneshot
+ExecStart=$BIN update
+ExecStartPost=/usr/bin/systemctl try-restart ${FILENAME}.service
+EOF
+
+doas tee "${AUTO_UPDATE}.timer" >/dev/null <<EOF
+[Unit]
+Description=Daily Beszel Agent update
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=2h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+
+doas systemctl daemon-reload
+doas systemctl enable --now "${FILENAME}.service" "${AUTO_UPDATE##*/}.timer"
+
+echo "Beszel Agent with daily auto update service installed."
