@@ -9,7 +9,6 @@ Exec=-c "mkdir -p '/tmp/opencloud';opencloud init || true; opencloud server"
 
 #Network=host
 PublishPort=127.0.0.1:9200:9200
-PublishPort=100.64.0.1:9200:9200
 
 # this is required as opencloud won't work otherwise
 AddHost=${DNSHOST1}
