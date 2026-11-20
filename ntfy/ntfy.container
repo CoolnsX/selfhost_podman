@@ -5,6 +5,7 @@ Description=Ntfy Container
 ContainerName=ntfy
 Image=docker.io/binwiederhier/ntfy:latest
 Exec=serve
+Network=none
 
 # Enable auto-update container
 AutoUpdate=registry
@@ -20,6 +21,7 @@ Environment=NTFY_LISTEN_UNIX=/var/lib/ntfy/ntfy.sock
 Environment=NTFY_LISTEN_UNIX_MODE=0770
 Environment=NTFY_BEHIND_PROXY=true
 Environment=NTFY_ATTACHMENT_CACHE_DIR=/var/lib/ntfy/attachments
+Environment=NTFY_ATTACHMENT_FILE_SIZE_LIMIT=100M
 Environment=NTFY_ENABLE_LOGIN=true
 Environment=NTFY_REQUIRE_LOGIN=true
 Environment=NTFY_TEMPLATE_DIR=/var/lib/ntfy/templates

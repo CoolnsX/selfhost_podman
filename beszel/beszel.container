@@ -9,12 +9,9 @@ Exec=serve --http "localhost:8090"
 
 # Enable auto-update container
 AutoUpdate=registry
-
-Environment=APP_URL=${APP_URL}
-Environment=DISABLE_SSH=true
+EnvironmentFile=./.env
 
 Volume=%h/podman/beszel/data:/beszel_data
-Volume=%h/podman/beszel/socket:/beszel_socket
 
 [Service]
 EnvironmentFile=%h/.config/containers/systemd/beszel/.env
